@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from rest_framework import generics
 
 from .models import Company, Transaction
@@ -26,3 +27,5 @@ class DetailTransaction(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TransactionSerializer
 
 
+class HomePageView(TemplateView):
+    template_name = "index.html"

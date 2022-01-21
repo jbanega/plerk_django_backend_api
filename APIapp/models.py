@@ -8,13 +8,10 @@ class Company(models.Model):
         ("INACTIVE", "inactive")
     )
 
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid1,
-        editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     status = models.CharField(max_length=20, choices=STATUS, default="ACTIVE")
-
+    
     class Meta:
         ordering = ["name"]
         verbose_name_plural = "Companies"
@@ -25,15 +22,12 @@ class Company(models.Model):
 
 class Transaction(models.Model):
     STATUS = (
-        ("CLOSE", "closed"),
+        ("CLOSED", "closed"),
         ("REVERSED", "reversed"),
         ("PENDING", "pending")
     )
 
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     company_id = models.ForeignKey(
         Company,
         related_name="transaction",
@@ -41,12 +35,12 @@ class Transaction(models.Model):
         null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     date = models.DateField(auto_now_add=True)
-    status_transaction = models.CharField(max_length=20, choices=STATUS)
+    status_transaction = models.CharField(max_length=20, choices=STATUS, default="PENDING")
     status_approved = models.BooleanField()
     final_charge_done = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
-        if (self.status_transaction == "closed") and (self.status_approved == True):
+        if (self.status_transaction == "CLOSED") and (self.status_approved == True):
             self.final_charge_done = True
         else:
             self.final_charge_done = False
