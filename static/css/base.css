@@ -1,0 +1,63 @@
+/* General style */
+* {
+    text-align: center;
+}
+
+h1 {
+    color: rgba(113, 65, 217, 1);
+    font-size: 250%;
+    padding: 3.5% 0% 0%;
+    text-align: center;
+}
+
+h3 {
+    padding: 1% 0% 1%;
+}
+
+.row {
+    width: 100%;
+    margin-bottom: 0.5%;
+}
+
+.col-left {
+    width: 75%;
+    padding: 1% 4% 0%;
+}
+
+.col-right {
+    width: 25%;
+    padding: 1% 4% 0%;
+}
+
+/* Navbar */
+.navbar  {
+    background-color: rgba(113, 65, 217, 1);
+}
+
+/* Footer */
+footer {
+    font-size: medium;
+    line-height: 1.8;
+    margin-top: 5.5%;
+    padding: 15px 23px;
+    text-align: right;
+}
+
+ /* Services container */
+.services {
+    margin-top: 2.5%;
+}
+
+.service_name {
+    text-align: left;
+    margin-left: 25%;
+}
+
+.btn-get {
+    text-align: center;
+}
+
+.company_id_input {
+    width: 75%;
+    margin-left: 25%;
+}

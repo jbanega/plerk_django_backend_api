@@ -1,7 +1,52 @@
 {% extends "_base.html" %}
+{% load static %}
 
 {% block title %}Plerk API{% endblock title %}
 
 {% block content %}
-    <h1>Plerk Django Backend API</h1>
+    <h1>plerk RESTful API</h1>
+    <h5>with Python/Django</h5>
+
+    <div class="services">
+        <h3>Dataset</h3>
+        <div class="btn-group btn-group-toggle">
+            <label class="btn btn-secondary active">
+              <button">Company List
+            </label>
+            <label class="btn btn-secondary">
+              <button">Transaction List
+            </label>
+        </div>
+
+    </div>
+    <div class="services">
+        <h3>Services</h3>
+
+        <div class="row">
+            <div class="col-left">
+                <td><h5 class="service_name">1. General Summary</h5></td>
+            </div>
+            <div class="col-right">
+                <td><button class="btn btn-outline-success btn-get" type="submit">Get</button></td>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-left">
+                <td><h5 class="service_name">2. Company Transaction</h5></td>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-left">
+                <form method="post">
+                    <input class="company_id_input" type="text" placeholder="Type the company id">
+                </form>
+            </div>
+            <div class="col-right">
+                <td><button class="btn btn-outline-success btn-get" type="submit">Get</button></td>
+            </div>
+        </div>
+
+    </div>
 {% endblock content %}

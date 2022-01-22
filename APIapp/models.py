@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 
+from .utils import generate_random_company_id
+
 
 class Company(models.Model):
     STATUS = (
@@ -8,7 +10,12 @@ class Company(models.Model):
         ("INACTIVE", "inactive")
     )
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.CharField(
+        primary_key=True, 
+        max_length=8,
+        default=generate_random_company_id,
+        editable=False,
+        unique=True)
     name = models.CharField(max_length=250)
     status = models.CharField(max_length=20, choices=STATUS, default="ACTIVE")
     
