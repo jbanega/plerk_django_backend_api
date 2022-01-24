@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Plerk API{% endblock title %}
+
+{% block content %}
+    <h1>plerk RESTful API</h1>
+    <h5>with Python/Django</h5>
+
+    <div class="response_container">
+        {% if title %}
+            <h3>{{ title }}</h3>
+
+            {% if title == "General Summary" %}
+                {% include "summary.html" %}
+            {% endif %}
+
+        {% else %}
+            <h3>Unselected data to retrieve</h3>
+        {% endif %}
+    </div>
+    
+{% endblock content %}

@@ -1,0 +1,58 @@
+<div class="json_response">
+    <div class="row">
+        <div class="col-left">
+            <td><h5 class="service_name">Json response</h5></td>
+        </div>
+        <div class="col-right">
+            <form action="{% url 'json_summary_overview' %}" method="get">
+                <td><button class="btn btn-outline-success btn-get" type="submit">Get</button></td>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-left">
+            <h6 class="service_name">1. Company with highest sales:</h6>
+        </div>
+        <div class="col-right">
+            <p>{{ company_highest_sales }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-left">
+            <h6 class="service_name">2. Company with lowest sales:</h6>
+        </div>
+        <div class="col-right">
+            <p>{{ company_lowest_sales }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-left">
+            <h6 class="service_name">3. Total price of approved transactions:</h6>
+        </div>
+        <div class="col-right">
+            <p>{{ total_price_approved }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-left">
+            <h6 class="service_name">4. Total price of not approved transactions:</h6>
+        </div>
+        <div class="col-right">
+            <p>{{ total_price_not_approved }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-left">
+            <h6 class="service_name">5. Company with highest rejected sales:</h6>
+        </div>
+        <div class="col-right">
+            <p>{{ company_highest_rejected_sales }}</p>
+        </div>
+    </div>
+
+</div>

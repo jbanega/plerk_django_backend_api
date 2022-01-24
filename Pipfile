@@ -10,6 +10,8 @@ djangorestframework = "*"
 django-environ = "*"
 django-extensions = "*"
 pandas = "*"
+requests = "*"
+django-pandas = "*"
 
 [dev-packages]
 

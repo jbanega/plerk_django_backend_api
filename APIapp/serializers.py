@@ -5,16 +5,17 @@ from .models import Company, Transaction
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
+        model = Company
         fields = (
             "id",
             "name",
             "status"
         )
-        model = Company
 
 
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
+        model = Transaction
         fields = (
             "id",
             "company_id",
@@ -24,4 +25,3 @@ class TransactionSerializer(serializers.ModelSerializer):
             "status_approved",
             "final_charge_done"
         )
-        model = Transaction
