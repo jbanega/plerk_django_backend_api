@@ -1,20 +1,15 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from rest_framework import generics, serializers, status
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+from rest_framework import generics, status
 
 from .models import Company, Transaction
 
 from .serializers import CompanySerializer, TransactionSerializer
 
-from .utils import generate_summary
+from .utils import generate_summary, generate_company_summary
 
-import requests
 import json
 
 
@@ -42,27 +37,21 @@ class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
 class HomePageView(TemplateView):
     template_name = "index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["company_id"] = "#"
+        return context
+
 
 class ResponsePageView(TemplateView):
     template_name = "response.html"
 
 
-# Views functions to render results
+# View functions to render results
 def get_company_list(request):
     if request.method == "GET":
         company = Company.objects.all()
         company_serializer = CompanySerializer(company, many=True)
-        return JsonResponse(company_serializer.data, safe=False)
-
-
-def get_company_detail(request, pk):
-    try:
-        company = Company.objects.get(pk=pk)
-    except Company.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == "GET":
-        company_serializer = CompanySerializer(company)
         return JsonResponse(company_serializer.data, safe=False)
 
 
@@ -76,9 +65,8 @@ def get_transaction_list(request):
 def see_summary_overview(request):
     if request.method == "GET":
         transaction = Transaction.objects.all()
-        summary = generate_summary(transaction)
-        context_string = json.dumps(summary) 
-        context = json.loads(context_string)
+        summary, _ = generate_summary(transaction) 
+        context = json.loads(json.dumps(summary))
 
         return render(
             request,
@@ -97,7 +85,74 @@ def see_summary_overview(request):
 def get_summary_overview(request):
     if request.method == "GET":
         transaction = Transaction.objects.all()
-        summary = generate_summary(transaction)
+        summary, _ = generate_summary(transaction)
         context = json.loads(json.dumps(summary))
+
+        return JsonResponse(context, safe=False)
+
+
+def see_top_10_company_with_more_transaction(request):
+    if request.method == "GET":
+        transaction = Transaction.objects.all()
+        _, summary = generate_summary(transaction)
+        context = json.loads(json.dumps(summary))
+
+        return render(
+            request,
+            "response.html",
+            context={
+                "title": "Top 10 Companies with The Mayor Transactions",
+                "top_10_companies_transaction": context["top_10_companies_with_the_most_transaction"],
+            }
+        )
+
+
+def get_top_10_company_with_more_transaction(request):
+    if request.method == "GET":
+        transaction = Transaction.objects.all()
+        _, summary = generate_summary(transaction)
+        context = json.loads(json.dumps(summary))
+
+        return JsonResponse(
+            context["top_10_companies_with_the_most_transaction"]["count"],
+            safe=False)
+
+
+def see_company_transaction_detail(request, company_id):
+    if request.method == "POST":
+        company_id = request.POST.get("company_id")
+        if company_id == "":
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        else:
+            try:
+                company_transactions = Transaction.objects.filter(company_id=company_id)
+            except Transaction.DoesNotExist:
+                return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        
+        if not company_transactions.exists():
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        
+        company_summary = generate_company_summary(company_transactions)
+        context = json.loads(json.dumps(company_summary))
+
+        return render(
+            request,
+            "response.html",
+            context={
+                "title": "Company Transactions",
+                "company_name": context["company_name"],
+                "company_id": company_id,
+                "number_approved_transactions": context["number_approved_transactions"],
+                "number_rejected_transactions": context["number_rejected_transactions"],
+                "date_max_n_transactions": context["date_max_n_transactions"],
+            }
+        )
+
+
+def get_company_transaction_detail(request, company_id):
+    if request.method == "GET":
+        company_transactions = Transaction.objects.filter(company_id=company_id)
+        company_summary = generate_company_summary(company_transactions)
+        context = json.loads(json.dumps(company_summary))
 
         return JsonResponse(context, safe=False)

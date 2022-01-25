@@ -9,14 +9,15 @@
 
     <div class="services">
         <h3>Dataset</h3>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <a href="{% url 'company_dataset' %}">
-                    <button class="btn btn-secondary active">Company List</button>
-                </a>
-                <a href="{% url 'transaction_dataset' %}">
-                    <button class="btn btn-secondary">Transaction List</button>
-                </a>
-        </div>
+        <a href="{% static 'datasets/test_database.csv' %}" style="text-decoration:none">
+            <button class="btn btn-success btn-dataset">Original CSV</button>
+        </a>
+        <a href="{% url 'company_dataset' %}" style="text-decoration:none">
+            <button class="btn btn-secondary btn-dataset">Company List</button>
+        </a>
+        <a href="{% url 'transaction_dataset' %}" style="text-decoration:none">
+            <button class="btn btn-secondary btn-dataset">Transaction List</button>
+        </a>
     </div>
 
     <div class="services">
@@ -35,27 +36,27 @@
 
         <div class="row">
             <div class="col-left">
-                <td><h5 class="service_name">2. Company Transaction</h5></td>
+                <td><h5 class="service_name">2. Company Transactions</h5></td>
             </div>
         </div>
 
         <div class="row">
+            <form class="company-id-form" action="{% url 'company_transactions' company_id %}" 
+            method="post">
+                {% csrf_token %}
+                <input type="text" placeholder="Type company ID" name="company_id" maxlength="8" autofocus>
+                <button class="btn btn-outline-success btn-input" type="submit">See</button>
+            </form>
+        </div>
+
+        <div class="row">
             <div class="col-left">
-                <form method="post">
-                    <input class="company_id_input" type="text" placeholder="Type the company id">
+                <td><h5 class="service_name">3. Top 10 Companies with The Mayor Transactions</h5></td>
+            </div>
+            <div class="col-right">
+                <form action="{% url 'top_10_transactions' %}" method="get">
+                    <td><button class="btn btn-outline-success btn-get" type="submit">See</button></td>
                 </form>
-            </div>
-            <div class="col-right">
-                <td><button class="btn btn-outline-success btn-get" type="submit">See</button></td>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-left">
-                <td><h5 class="service_name">3. Top 10 Companies with more Transactions</h5></td>
-            </div>
-            <div class="col-right">
-                <td><button class="btn btn-outline-success btn-get" type="submit">See</button></td>
             </div>
         </div>
 

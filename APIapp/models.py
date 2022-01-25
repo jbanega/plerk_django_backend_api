@@ -41,7 +41,7 @@ class Transaction(models.Model):
         on_delete=models.CASCADE,
         null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField()
     status_transaction = models.CharField(max_length=20, choices=STATUS, default="PENDING")
     status_approved = models.BooleanField()
     final_charge_done = models.BooleanField(default=True)
@@ -58,4 +58,4 @@ class Transaction(models.Model):
         verbose_name_plural = "Transactions"
 
     def __str__(self):
-        return f"{self.price} at {self.date}"
+        return f"{self.company_id}: {self.price} at {self.date}"

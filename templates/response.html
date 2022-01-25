@@ -13,6 +13,12 @@
 
             {% if title == "General Summary" %}
                 {% include "summary.html" %}
+
+            {% elif title == "Top 10 Companies with The Mayor Transactions" %}
+                {% include "top10_transaction.html" %}
+
+            {% elif title == "Company Transactions" %}
+                {% include "company_transactions.html" %}
             {% endif %}
 
         {% else %}

@@ -1,0 +1,33 @@
+<div class="json_response">
+
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Company name</th>
+                    <th scope="col">Number of transactions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for company, n_transaction in top_10_companies_transaction.count.items %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ company}}</td>
+                    <td>{{ n_transaction}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td><h5>Json response</h5></td>
+                    <td>
+                        <form action="{% url 'json_top_10_transactions' %}" method="get">
+                            <button class="btn btn-outline-success btn-get" type="submit">Get</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

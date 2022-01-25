@@ -2,46 +2,37 @@
 
     <div class="row">
         <div class="col-left">
-            <h6 class="service_name">1. Company with highest sales:</h6>
+            <h6 class="service_name">1. Company name:</h6>
         </div>
         <div class="col-right">
-            <p>{{ company_highest_sales }}</p>
+            <p>{{ company_name }}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-left">
-            <h6 class="service_name">2. Company with lowest sales:</h6>
+            <h6 class="service_name">2. Number of approved transactions:</h6>
         </div>
         <div class="col-right">
-            <p>{{ company_lowest_sales }}</p>
+            <p>{{ number_approved_transactions }}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-left">
-            <h6 class="service_name">3. Total price of approved transactions:</h6>
+            <h6 class="service_name">3. Number of rejected transactions:</h6>
         </div>
         <div class="col-right">
-            <p>{{ total_price_approved }}</p>
+            <p>{{ number_rejected_transactions }}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-left">
-            <h6 class="service_name">4. Total price of not approved transactions:</h6>
+            <h6 class="service_name">4. Date of maximum number of transactions:</h6>
         </div>
         <div class="col-right">
-            <p>{{ total_price_not_approved }}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-left">
-            <h6 class="service_name">5. Company with highest rejected sales:</h6>
-        </div>
-        <div class="col-right">
-            <p>{{ company_highest_rejected_sales }}</p>
+            <p>{{ date_max_n_transactions }}</p>
         </div>
     </div>
 
@@ -50,7 +41,7 @@
             <td><h5 class="service_name">Json response</h5></td>
         </div>
         <div class="col-right">
-            <form action="{% url 'json_summary_overview' %}" method="get">
+            <form action="{% url 'json_company_transactions' company_id %}" method="get">
                 <td><button class="btn btn-outline-success btn-get" type="submit">Get</button></td>
             </form>
         </div>
