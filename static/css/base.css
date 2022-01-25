@@ -59,18 +59,12 @@ footer {
     margin-left: 25%;
 }
 
+.service_name_input {
+    width: 50%;
+}
+
 .btn-get {
     text-align: center;
-}
-
-.company_id_input {
-    width: 80%;
-    margin-left: 10%;
-    padding-left: 20%;
-}
-
-.btn-input {
-    margin-right: 20%;
 }
 
 /* Json response webpage */
