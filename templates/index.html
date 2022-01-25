@@ -44,15 +44,16 @@
             <div class="col-left">
                 <form class="company-id-form" action="{% url 'company_transactions' company_id %}" 
                 method="post">
-                {% csrf_token %}
-                <td>
-                    <input type="text" placeholder="Type company ID" name="company_id" 
-                    maxlength="8" class="service_name_input" autofocus>
-                </td>    
-            </div>
-            <div class="col-right">
-                <button class="btn btn-outline-success btn-input" type="submit">See</button>   
-            </div>
+                    {% csrf_token %}
+                    <td>
+                        <input type="text" placeholder="Type company ID" name="company_id" 
+                        maxlength="8" class="service_name_input" autofocus>
+                    </td>  
+                </div>
+                <div class="col-right">
+                    <button class="btn btn-outline-success btn-input" type="submit">See</button>   
+                </div>
+            </form>  
         </div>
 
         <div class="row">
