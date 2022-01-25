@@ -12,6 +12,8 @@ django-extensions = "*"
 pandas = "*"
 requests = "*"
 django-pandas = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 
